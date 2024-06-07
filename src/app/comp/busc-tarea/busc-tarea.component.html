@@ -1,24 +1,38 @@
 <p>busc-tarea works!</p>
 <h1>Buscar Tarea</h1>
+
+<form class="example-form">
 <div>
   <div>
-    <label for="tarea">Buscar</label>
-    <input type="text" [formControl]="buscada">
+    <mat-form-field class="example-full-width">
+      <mat-label>Buscar</mat-label>
+      <input matInput [formControl]="buscada"placeholder="Tarea" value="Tarea">
+    </mat-form-field>
   </div>
   <div>
-    <label for="prioridad">Prioridad</label>
-    <select class="control" [formControl]="prioridad" >
-        <option value="alta">Alta</option>
-        <option value="media" selected>Media</option>
-        <option value="baja">Baja</option>
-    </select  >
+    <mat-form-field>
+        <mat-label>Prioridad</mat-label>
+        <mat-select matInput class="control" [formControl]="prioridad">
+          <mat-option value="alta">Alta</mat-option>
+          <mat-option value="media">Media</mat-option>
+          <mat-option value="baja">Baja</mat-option>
+        </mat-select>
+      </mat-form-field>
+    
   </div>
   <div>
-    <label for="desc">Descripción</label>
-    <button (click)="onClick()">A-Z</button>
+    
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle (click)="onClick()" value="bold">A-Z</mat-button-toggle>
+    </mat-button-toggle-group>
+    <label for="desc">ORDENAR</label><br>
+    
   </div>
   
-  <button (click)="buscar()">Crear Tarea</button>
+  <button mat-raised-button color="primary" (click)="buscar()">Buscar</button>
+
 </div>
+<form >
+    
 
 <app-cons-tarea></app-cons-tarea>

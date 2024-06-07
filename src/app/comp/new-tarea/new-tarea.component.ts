@@ -20,22 +20,25 @@ export class NewTareaComponent {
   public prioridad = new FormControl();
   public desc = new FormControl();
   now = new Date();
-  public fechaCreacion = new FormControl(this.now); 
-  status = 1;
+  //public fechaCreacion = new FormControl(this.now); 
+  public fechaCreacion = this.now.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
+  status = true;
+  tareas :Tarea[]=[];
 
 
    tarea1 = new Tarea('Finish Report', 'High', 'Complete the market analysis report.', new Date('2024-06-05').toISOString(), false);
    tarea2 = new Tarea('Design New Website', 'Medium', 'Create wireframes and visual mockups for the new company website.', new Date().toISOString(), true);
    tarea3 = new Tarea('Prepare Presentation', 'Low', 'Gather data and prepare slides for the upcoming team meeting.', new Date().toISOString(), true);
 
-   tareas: Tarea[] = [this.tarea1, this.tarea2, this.tarea3];
+   //tareas: Tarea[] = [this.tarea1, this.tarea2, this.tarea3];
 
   crear() {
     console.log('Tarea:', this.tarea.value);
     console.log('Prioridad:', this.prioridad.value);
     console.log('Descripción:', this.desc.value);
-    console.log('Fecha de Creación:', this.fechaCreacion.value);
+    console.log('Fecha de Creación:', this.fechaCreacion);
     console.log('Estado:', this.status);
+    this.tareas.push(new Tarea( this.tarea.value, this.prioridad.value, this.desc.value, this.fechaCreacion,  this.status ))
   }
 
 }
