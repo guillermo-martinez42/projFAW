@@ -23,12 +23,14 @@ export class BuscTareaComponent implements OnInit {
   public buscada = new FormControl();
   public prioridad = new FormControl();
   tareas :Tarea[]=[];
+  constructor(private share:ShareDataService){}
 
   onClick() {
     this.clicked.setValue(this.clicked.value === 0 ? 1 : 0);
+    this.share.triggerSort();
   }
 
-  constructor(private share:ShareDataService){}
+
   ngOnInit(): void {
     this.share.currentTareas.subscribe(x => this.tareas = x )
 }
@@ -37,6 +39,10 @@ export class BuscTareaComponent implements OnInit {
     console.log('Clicked:', this.clicked.value);
     console.log('Buscar:', this.buscada.value);
     console.log('Prioridad:', this.prioridad.value);
+    const priority = this.prioridad.value;
+    const searchTerm = this.buscada.value;
+    this.share.filterTareasByPriority(priority);
+    this.share.filterSearchTermTareas(searchTerm);
   }
 
 }

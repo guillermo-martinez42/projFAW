@@ -7,11 +7,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import { ShareDataService } from '../../services/share-data.service';
+import {MatGridListModule} from '@angular/material/grid-list'; 
 
 @Component({
   selector: 'app-new-tarea',
   standalone: true,
-  imports: [ReactiveFormsModule, ConsTareaComponent, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule, MatButtonModule ],
+  imports: [ReactiveFormsModule, ConsTareaComponent, MatInputModule, MatFormFieldModule, MatSelectModule, FormsModule, MatButtonModule, MatGridListModule ],
   templateUrl: './new-tarea.component.html',
   styleUrl: './new-tarea.component.scss'
 })
