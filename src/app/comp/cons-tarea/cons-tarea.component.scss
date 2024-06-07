@@ -1,0 +1,44 @@
+.container {
+    text-align: center;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 4px;
+    color: #fff;
+  }
+  
+  .Low {
+    background-color: green;
+  }
+  
+  .Medium {
+    background-color: orange;
+  }
+  
+  .High {
+    background-color: red;
+  }
+  
+  button {
+    background-color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: #f0f0f0;
+  }
+  
