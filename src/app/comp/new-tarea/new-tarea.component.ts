@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormsModule } from '@angular/forms';
 import { Tarea } from '../../models/tarea.model';
 import { ConsTareaComponent } from '../cons-tarea/cons-tarea.component';
@@ -6,6 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import { ShareDataService } from '../../services/share-data.service';
 
 @Component({
   selector: 'app-new-tarea',
@@ -14,7 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
   templateUrl: './new-tarea.component.html',
   styleUrl: './new-tarea.component.scss'
 })
-export class NewTareaComponent {
+export class NewTareaComponent implements OnInit {
 
   public tarea = new FormControl();
   public prioridad = new FormControl();
@@ -24,6 +25,14 @@ export class NewTareaComponent {
   public fechaCreacion = this.now.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' });
   status = true;
   tareas :Tarea[]=[];
+
+  constructor(private share:ShareDataService){}
+
+  ngOnInit(): void {
+      this.share.currentTareas.subscribe(x => this.tareas = x )
+  }
+
+
 
 
    tarea1 = new Tarea('Finish Report', 'High', 'Complete the market analysis report.', new Date('2024-06-05').toISOString(), false);
@@ -38,7 +47,8 @@ export class NewTareaComponent {
     console.log('Descripción:', this.desc.value);
     console.log('Fecha de Creación:', this.fechaCreacion);
     console.log('Estado:', this.status);
-    this.tareas.push(new Tarea( this.tarea.value, this.prioridad.value, this.desc.value, this.fechaCreacion,  this.status ))
+    //this.tareas.push(new Tarea( this.tarea.value, this.prioridad.value, this.desc.value, this.fechaCreacion,  this.status ))
+    this.share.addTareas(new Tarea(this.tarea.value, this.prioridad.value, this.desc.value, this.fechaCreacion,  this.status));
   }
 
 }

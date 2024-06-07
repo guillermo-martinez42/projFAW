@@ -22,8 +22,6 @@ export class SignupComponent {
 
    signUp() {
     this.usuarios.push(new Usuario(this.email.value, this.nombre.value, this.dob.value, this.pass.value, this.genero.value))
-
-
     console.log('Email:', this.email.value);
     console.log('Nombre:', this.nombre.value);
     console.log('DOB:', this.dob.value);
