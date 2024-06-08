@@ -1,10 +1,13 @@
 <div class="container">
-<p>cons-tarea works!</p>
+
 <ul>
     @for(valor of tareas.reverse(); track valor.nombreTarea){
-    <li  [ngClass]="(valor.prioridad)" >{{valor.nombreTarea}} - {{valor.fechaCreacion}} - {{valor.status}} - {{valor.prioridad}} 
-        <button (click)="editTarea(valor)">Edit</button>
-        <button (click)="deleteTarea(valor)">Delete</button>
+    <li  [ngClass]="(valor.prioridad)" >
+        <h4>{{valor.nombreTarea}}</h4>
+        <br>
+        <p>{{valor.descripcion}}-  {{valor.fechaCreacion}}</p>
+        
+        <button (click)="confirmDelete(valor)">Activa</button>
     </li>
     }
     

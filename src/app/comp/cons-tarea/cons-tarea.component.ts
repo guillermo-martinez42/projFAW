@@ -3,6 +3,10 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { Tarea } from '../../models/tarea.model';
 import { CommonModule } from '@angular/common';
 import { ShareDataService } from '../../services/share-data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDeleteDialogComponent } from '../../confirm-delete-dialog/confirm-delete-dialog.component';
+
+
 
 
 
@@ -21,7 +25,8 @@ export class ConsTareaComponent implements OnInit {
   originalTareas: Tarea[] = [];
   filteredTareas: Tarea[] = [];
 
-  constructor(private share:ShareDataService){}
+  constructor(private share:ShareDataService, public dialog: MatDialog){}
+
 
   ngOnInit(): void {
       this.share.currentTareas.subscribe(x => this.tareas = x );
@@ -55,16 +60,27 @@ export class ConsTareaComponent implements OnInit {
 
   //@Output() borrarTarea: EventEmitter<Tarea> = new EventEmitter<Tarea>();
 
-  editTarea(tarea: Tarea): void {
-    console.log('Edit Tarea:', tarea.prioridad);
-    // Implement your edit logic here
-  }
 
-  deleteTarea(tarea: Tarea): void {
+  confirmDelete(tarea: Tarea): void {
     console.log('Delete Tarea:', tarea);
     this.tareas = this.tareas.filter(t => t !== tarea);
     //this.borrarTarea.emit(tarea);
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteTarea(tarea);
+      }
+    });
 
   }
 
+  deleteTarea(tarea: Tarea): void {
+    const index = this.tareas.indexOf(tarea);
+    if (index > -1) {
+      this.tareas.splice(index, 1);
+      this.share.updateTareas(this.tareas);
+    }
+
+}
 }

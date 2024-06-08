@@ -7,6 +7,7 @@ import { BuscTareaComponent } from './comp/busc-tarea/busc-tarea.component';
 import { ConsTareaComponent } from './comp/cons-tarea/cons-tarea.component';
 
 export const routes: Routes = [
+    {path : '' , redirectTo : '/signup' , pathMatch : 'full'},
     {path:'signup',component:SignupComponent},
     {path:'login',component:LoginComponent},
     {path:'app/new-tarea',component:NewTareaComponent},

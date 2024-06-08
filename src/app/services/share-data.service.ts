@@ -44,7 +44,12 @@ export class ShareDataService {
   filterSearchTermTareas$ = this.filterSearchTermSubject.asObservable();
 
   filterSearchTermTareas(searchTerm: string) {
-    this.filterSearchTermSubject.next(searchTerm);
+    let array = this.tareas.getValue();
+    //this.array = this.array.filter(x => x.nombreTarea.value == searchTerm );
+  }
+
+  updateTareas(tareas: Tarea[]) {
+    this.tareas.next(tareas);
   }
 
 
